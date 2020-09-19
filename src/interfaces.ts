@@ -24,7 +24,10 @@ export interface IUser {
 export interface IToy {
   /** unique */
   id: string;
+  name: string;
   quantity: number;
+  price: number;
+  totalCost: number;
   description: string;
   /** unique pair: `id + categoryId` */
   categoryId: string;
@@ -42,7 +45,10 @@ export interface ICategory {
 export interface IToyAggregate {
   /** unique */
   id: string;
+  name: string;
   quantity: number;
+  price: number;
+  totalCost: number;
   description: string;
   category: ICategory;
 }

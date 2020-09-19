@@ -11,7 +11,15 @@ export class CategoriesService {
     this.categories = [
       new CategoryEntity({
         id: '1',
-        name: 'Hotwheels',
+        name: 'Electric toy',
+      }),
+      new CategoryEntity({
+        id: '2',
+        name: 'Constructor',
+      }),
+      new CategoryEntity({
+        id: '3',
+        name: 'Doll',
       }),
     ];
   }

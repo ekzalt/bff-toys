@@ -17,15 +17,62 @@ export class TransactionsService {
         toys: [
           new ToyAggregate({
             id: '1',
+            name: 'Car',
             quantity: 5,
-            description: 'some toy',
+            price: 500,
+            totalCost: 500 * 5,
+            description: 'Red color electric car',
             categoryId: '1',
           }, new CategoryEntity({
             id: '1',
-            name: 'Hotwheels',
+            name: 'Electric toy',
+          })),
+          new ToyAggregate({
+            id: '2',
+            name: 'Lego',
+            quantity: 10,
+            price: 200,
+            totalCost: 200 * 10,
+            description: 'Lego constructor',
+            categoryId: '2',
+          }, new CategoryEntity({
+            id: '2',
+            name: 'Constructor',
           })),
         ],
         type: TxType.incoming,
+      }),
+      new TransactionAggregate({
+        id: '2',
+        date: new Date(),
+        userId: '1',
+        toys: [
+          new ToyAggregate({
+            id: '1',
+            name: 'Car',
+            quantity: 5,
+            price: 500,
+            totalCost: 500 * 5,
+            description: 'Red color electric car',
+            categoryId: '1',
+          }, new CategoryEntity({
+            id: '1',
+            name: 'Electric toy',
+          })),
+          new ToyAggregate({
+            id: '3',
+            name: 'Barby',
+            quantity: 5,
+            price: 300,
+            totalCost: 300 * 5,
+            description: 'Barby doll',
+            categoryId: '3',
+          }, new CategoryEntity({
+            id: '3',
+            name: 'Doll',
+          })),
+        ],
+        type: TxType.outcoming,
       }),
     ];
   }
@@ -57,7 +104,10 @@ export class TransactionsService {
       .increaseToyQuantity(t.id, t.quantity)
       .then(toy => new ToyAggregate({
         id: toy.id,
+        name: toy.name,
         quantity: t.quantity, // quantity from ITxRequest toy
+        price: toy.price,
+        totalCost: toy.price * t.quantity, // quantity from ITxRequest toy
         description: toy.description,
         categoryId: toy.category.id,
       }, toy.category)));
@@ -74,7 +124,10 @@ export class TransactionsService {
       .decreaseToyQuantity(t.id, t.quantity)
       .then(toy => new ToyAggregate({
         id: toy.id,
+        name: toy.name,
         quantity: t.quantity, // quantity from ITxRequest toy
+        price: toy.price,
+        totalCost: toy.price * t.quantity, // quantity from ITxRequest toy
         description: toy.description,
         categoryId: toy.category.id,
       }, toy.category)));

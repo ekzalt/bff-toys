@@ -11,9 +11,30 @@ export class ToysService {
     this.toys = [
       new ToyEntity({
         id: '1',
+        name: 'Car',
         quantity: 10,
-        description: 'some toy',
+        price: 500,
+        totalCost: 500 * 10,
+        description: 'Red color electric car',
         categoryId: '1',
+      }),
+      new ToyEntity({
+        id: '2',
+        name: 'Lego',
+        quantity: 20,
+        price: 200,
+        totalCost: 200 * 20,
+        description: 'Lego constructor',
+        categoryId: '2',
+      }),
+      new ToyEntity({
+        id: '3',
+        name: 'Barby',
+        quantity: 15,
+        price: 300,
+        totalCost: 300 * 15,
+        description: 'Barby doll',
+        categoryId: '3',
       }),
     ];
   }
@@ -76,7 +97,7 @@ export class ToysService {
   }
 
   async increaseQuantity(id: string, quantity: number): Promise<IToy> {
-    this.validateQuantity(quantity);
+    this.validatePriceOrQuantity(quantity);
     const i = this.toys.findIndex(t => t.id === id);
 
     if (i < 0) {
@@ -84,12 +105,13 @@ export class ToysService {
     }
 
     this.toys[i].quantity += quantity;
+    this.toys[i].totalCost = this.toys[i].price * this.toys[i].quantity;
 
     return this.toys[i];
   }
 
   async decreaseQuantity(id: string, quantity: number): Promise<IToy> {
-    this.validateQuantity(quantity);
+    this.validatePriceOrQuantity(quantity);
     const i = this.toys.findIndex(t => t.id === id);
 
     if (i < 0) {
@@ -101,14 +123,15 @@ export class ToysService {
     }
 
     this.toys[i].quantity -= quantity;
+    this.toys[i].totalCost = this.toys[i].price * this.toys[i].quantity;
 
     return this.toys[i];
   }
 
   // TODO: move this check to tx validation middleware
-  validateQuantity(quantity: number) {
-    if (!Number.isInteger(quantity) || quantity < 1) {
-      throw new BadRequestException('Invalid quantity');
+  validatePriceOrQuantity(n: number) {
+    if (!Number.isInteger(n) || n < 1) {
+      throw new BadRequestException('Invalid number value');
     }
   }
 
