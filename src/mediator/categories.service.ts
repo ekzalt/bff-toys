@@ -75,6 +75,7 @@ export class CategoriesService {
     }
 
     const entity = this.categories[i];
+    this.categories.splice(i, 1);
 
     return entity;
   }

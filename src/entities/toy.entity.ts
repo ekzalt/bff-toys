@@ -21,6 +21,10 @@ export class ToyEntity implements IToy {
   }
 
   static create(params: Partial<IToy>): ToyEntity {
-    return new ToyEntity({ ...params,  id: uuidv4() });
+    return new ToyEntity({
+      ...params,
+      id: uuidv4(),
+      quantity: 0,
+    });
   }
 }

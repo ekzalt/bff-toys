@@ -67,7 +67,11 @@ export class ToysService {
       throw new NotFoundException();
     }
 
-    this.toys[i] = new ToyEntity({ ...toy, id });
+    this.toys[i] = new ToyEntity({
+      ...toy,
+      id,
+      quantity: this.toys[i].quantity,
+    });
 
     return this.toys[i];
   }
@@ -79,7 +83,12 @@ export class ToysService {
       throw new NotFoundException();
     }
 
-    this.toys[i] = new ToyEntity({ ...this.toys[i], ...toy, id });
+    this.toys[i] = new ToyEntity({
+      ...this.toys[i],
+      ...toy,
+      id,
+      quantity: this.toys[i].quantity,
+    });
 
     return this.toys[i];
   }
