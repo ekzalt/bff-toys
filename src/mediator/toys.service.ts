@@ -101,6 +101,7 @@ export class ToysService {
     }
 
     const entity = this.toys[i];
+    this.toys.splice(i, 1);
 
     return entity;
   }
